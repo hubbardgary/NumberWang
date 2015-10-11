@@ -1,0 +1,8 @@
+.vs/
+ConsoleGui/bin
+ConsoleGui/obj
+NumberWangEngine/bin
+NumberWangEngine/obj
+TestResults
+Tests/GameEngineTests/bin
+Tests/GameEngineTests/obj
