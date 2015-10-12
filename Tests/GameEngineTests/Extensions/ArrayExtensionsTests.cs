@@ -16,6 +16,12 @@ namespace NumberWang.Extensions.Tests
                 {40,41,42,43}
             };
 
+        string[,] nonSquareStartMatrix = new string[2, 6]
+        {
+            {"a","b","c","d","e","f"},
+            {"g","h","i","j","k","l"}
+        };
+
         [TestMethod()]
         [ExpectedException(typeof(NotSupportedException))]
         public void RotateClockwise_Non_90_Degree_Angle_ThrowsException()
@@ -138,7 +144,13 @@ namespace NumberWang.Extensions.Tests
         public void RotateClockwise_360_Degrees_Test()
         {
             // ARRANGE
-            int[,] rotated360Expected = startMatrix;
+            int[,] rotated360Expected = new int[4,4]
+            {
+                {10,11,12,13},
+                {20,21,22,23},
+                {30,31,32,33},
+                {40,41,42,43}
+            };
 
             // ACT
             int[,] endMatrix = startMatrix.RotateClockwise(360);
@@ -148,6 +160,106 @@ namespace NumberWang.Extensions.Tests
             for (int i = 0; i < len; i++)
             {
                 for (int j = 0; j < len; j++)
+                {
+                    Assert.AreEqual(rotated360Expected[i, j], endMatrix[i, j]);
+                }
+            }
+        }
+        
+        [TestMethod()]
+        public void RotateClockwise_Non_Square_Array_90_Degrees_Test()
+        {
+            // ARRANGE
+            string[,] rotated90Expected = new string[6, 2]
+            {
+                {"g","a" },
+                {"h","b" },
+                {"i","c" },
+                {"j","d" },
+                {"k","e" },
+                {"l","f" }
+            };
+
+            // ACT
+            string[,] endMatrix = nonSquareStartMatrix.RotateClockwise(90);
+
+            // ASSERT
+            for (int i = 0; i < rotated90Expected.GetLength(0); i++)
+            {
+                for (int j = 0; j < rotated90Expected.GetLength(1); j++)
+                {
+                    Assert.AreEqual(rotated90Expected[i, j], endMatrix[i, j]);
+                }
+            }
+        }
+
+        [TestMethod()]
+        public void RotateClockwise_Non_Square_Array_180_Degrees_Test()
+        {
+            // ARRANGE
+            string[,] rotated180Expected = new string[2, 6]
+            {
+                {"l","k","j","i","h","g"},
+                {"f","e","d","c","b","a"}
+            };
+
+            // ACT
+            string[,] endMatrix = nonSquareStartMatrix.RotateClockwise(180);
+
+            // ASSERT
+            for (int i = 0; i < rotated180Expected.GetLength(0); i++)
+            {
+                for (int j = 0; j < rotated180Expected.GetLength(1); j++)
+                {
+                    Assert.AreEqual(rotated180Expected[i, j], endMatrix[i, j]);
+                }
+            }
+        }
+
+        [TestMethod()]
+        public void RotateClockwise_Non_Square_Array_270_Degrees_Test()
+        {
+            // ARRANGE
+            string[,] rotated270Expected = new string[6, 2]
+            {
+                {"f","l" },
+                {"e","k" },
+                {"d","j" },
+                {"c","i" },
+                {"b","h" },
+                {"a","g" }
+            };
+
+            // ACT
+            string[,] endMatrix = nonSquareStartMatrix.RotateClockwise(270);
+
+            // ASSERT
+            for (int i = 0; i < rotated270Expected.GetLength(0); i++)
+            {
+                for (int j = 0; j < rotated270Expected.GetLength(1); j++)
+                {
+                    Assert.AreEqual(rotated270Expected[i, j], endMatrix[i, j]);
+                }
+            }
+        }
+
+        [TestMethod()]
+        public void RotateClockwise_Non_Square_Array_360_Degrees_Test()
+        {
+            // ARRANGE
+            string[,] rotated360Expected = new string[2, 6]
+            {
+                {"a","b","c","d","e","f"},
+                {"g","h","i","j","k","l"}
+            };
+
+            // ACT
+            string[,] endMatrix = nonSquareStartMatrix.RotateClockwise(360);
+
+            // ASSERT
+            for (int i = 0; i < rotated360Expected.GetLength(0); i++)
+            {
+                for (int j = 0; j < rotated360Expected.GetLength(1); j++)
                 {
                     Assert.AreEqual(rotated360Expected[i, j], endMatrix[i, j]);
                 }
