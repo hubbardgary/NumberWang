@@ -23,24 +23,38 @@ namespace NumberWang.Extensions
                 return sourceArray;
             }
 
-            int len = sourceArray.GetLength(0);
-            T[,] rotated = new T[len, len];
+            int len1 = sourceArray.GetLength(0);
+            int len2 = sourceArray.GetLength(1);
+            int idx1 = len1 - 1;
+            int idx2 = len2 - 1;
+            T[,] rotated;
 
-            for (int x = 0; x < len; x++)
+            // For non-square arrays, swap the dimensions accordingly
+            if (degrees == 180)
             {
-                for (int y = 0; y < len; y++)
+                rotated = new T[len1, len2];
+            }
+            else
+            {
+                rotated = new T[len2, len1];
+            }
+
+            // Transpose the value of each cell to the new array based on the degrees of rotation
+            for (int x = 0; x < len1; x++)
+            {
+                for (int y = 0; y < len2; y++)
                 {
                     if (degrees == 90)
                     {
-                        rotated[y, 3 - x] = sourceArray[x, y];
+                        rotated[y, idx1 - x] = sourceArray[x, y];
                     }
                     else if (degrees == 180)
                     {
-                        rotated[3 - x, 3 - y] = sourceArray[x, y];
+                        rotated[idx1 - x, idx2 - y] = sourceArray[x, y];
                     }
                     else if (degrees == 270)
                     {
-                        rotated[3 - y, x] = sourceArray[x, y];
+                        rotated[idx2 - y, x] = sourceArray[x, y];
                     }
                 }
             }
