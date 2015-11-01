@@ -22,7 +22,7 @@ namespace NumberWang.Gui
 
         public void Play()
         {
-            ShowGame(game);
+            DrawBoard(game);
 
             while (!game.GameOver())
             {
@@ -32,14 +32,14 @@ namespace NumberWang.Gui
                     moved = game.Move(ControlMap[key]);
 
                 if (moved)
-                    ShowGame(game);
+                    DrawBoard(game);
 
                 FlushKeyBuffer();
             }
             GameOver();
         }
 
-        public void ShowGame(IGameEngine game)
+        public void DrawBoard(IGameEngine game)
         {
             Console.Clear();
             ShowBoard(game);

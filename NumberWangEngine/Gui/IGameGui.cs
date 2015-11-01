@@ -2,8 +2,7 @@
 {
     public interface IGameGui
     {
-        void ShowGame(IGameEngine game);
-
+        void DrawBoard(IGameEngine game);
         void Play();
     }
 }

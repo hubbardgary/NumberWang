@@ -8,7 +8,7 @@ namespace NumberWang.Gui
         {
             do
             {
-                IGameGui gameGui = new ConsoleGui(new Threes());
+                IGameGui gameGui = new ConsoleGui(new TwentyFortyEight());
                 gameGui.Play();
             }
             while (Console.ReadKey(true).Key != ConsoleKey.Escape);

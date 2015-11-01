@@ -77,6 +77,20 @@ namespace NumberWang.Extensions
                 }
             }
         }
+        
+        /// <summary>
+        /// Helper method to perform a given action on each row in a 2D array
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array"></param>
+        /// <param name="action"></param>
+        public static void ForEachRow<T>(this T[,] array, Action<int> action)
+        {
+            for (int i = 0; i < array.GetLength(0); i++)
+            {
+                action(i);
+            }
+        }
 
         /// <summary>
         /// Helper method to perform a given action on each adjacent cell within a 2D array

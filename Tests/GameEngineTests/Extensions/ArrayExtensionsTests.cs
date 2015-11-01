@@ -290,6 +290,29 @@ namespace NumberWang.Extensions.Tests
         }
 
         [TestMethod()]
+        public void ForEachRow_Test()
+        {
+            // ARRANGE
+            int[,] grid = new int[4, 4]
+            {
+                {1,0,0,0},
+                {2,0,0,0},
+                {3,0,0,0},
+                {4,0,0,0}
+            };
+
+            int counter = 1;
+
+            // ACT
+            grid.ForEachRow((i) =>
+            {
+                // ASSERT
+                Assert.AreEqual(counter, grid[i, 0]);
+                counter++;
+            });
+        }
+
+        [TestMethod()]
         public void ForEachAdjacentCell_Test()
         {
             // ARRANGE

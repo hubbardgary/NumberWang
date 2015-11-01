@@ -22,9 +22,20 @@ namespace NumberWang
         public int[,] Board { get; set; }
         public int[,] MoveMatrix { get; set; }
         private int[] SpawnNumbers { get; set; }
-        private Random random { get; set; }
+        public Random MyRandom { get; set; }
         public int NextNumber { get; set; }
-        
+
+        public struct Coordinate
+        {
+            public int x, y;
+
+            public Coordinate(int x, int y)
+            {
+                this.x = x;
+                this.y = y;
+            }
+        }
+
         // Determines how to rotate the board to perform 'ShiftTilesLeft()'
         Dictionary<Direction, int> RotationMap = new Dictionary<Direction, int>()
         {
@@ -47,13 +58,13 @@ namespace NumberWang
         {
             Board = new int[BoardSize, BoardSize];
             MoveMatrix = new int[BoardSize, BoardSize];
-            random = new Random();
+            MyRandom = new Random();
             int tilesLaid = 0;
 
             do
             {
-                int x = random.Next(BoardSize);
-                int y = random.Next(BoardSize);
+                int x = MyRandom.Next(BoardSize);
+                int y = MyRandom.Next(BoardSize);
                 if (Board[x, y] == 0)
                 {
                     Board[x, y] = PickANumber();
@@ -184,16 +195,16 @@ namespace NumberWang
 
         private void SpawnNewTile()
         {
-            int newTile = PickACoordinate();
-            Board[newTile, Board.GetUpperBound(0)] = NextNumber;
+            Coordinate newTile = PickACoordinate();
+            Board[newTile.x, newTile.y] = NextNumber;
         }
 
         private int PickANumber()
         {
-            return SpawnNumbers[random.Next(0, SpawnNumbers.Length)];
+            return SpawnNumbers[MyRandom.Next(SpawnNumbers.Length)];
         }
 
-        private int PickACoordinate()
+        public virtual Coordinate PickACoordinate()
         {
             // Only consider vacant cells in the relevant row
             var vacantCells = new List<int>();
@@ -204,7 +215,9 @@ namespace NumberWang
                     vacantCells.Add(i);
                 }
             }
-            return vacantCells[random.Next(0, vacantCells.Count - 1)];
+            return new Coordinate(
+                vacantCells[MyRandom.Next(vacantCells.Count - 1)],
+                Board.GetUpperBound(0));
         }
     }
 }

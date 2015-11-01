@@ -44,6 +44,7 @@
     <Compile Include="Engine\Eights.cs" />
     <Compile Include="Engine\IGameEngine.cs" />
     <Compile Include="Engine\Threes.cs" />
+    <Compile Include="Engine\TwentyFortyEight.cs" />
     <Compile Include="Extensions\ArrayExtensions.cs" />
     <Compile Include="Gui\IGameGui.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
