@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngine", "NumberWangEng
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngineTests", "Tests\GameEngineTests\GameEngineTests.csproj", "{AD873C9D-8E41-4C04-A2CC-24FEA1655D07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGui", "WpfGui\WpfGui.csproj", "{1B3092B8-0534-4A5C-A82B-3EF14D232DB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AD873C9D-8E41-4C04-A2CC-24FEA1655D07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD873C9D-8E41-4C04-A2CC-24FEA1655D07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD873C9D-8E41-4C04-A2CC-24FEA1655D07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B3092B8-0534-4A5C-A82B-3EF14D232DB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B3092B8-0534-4A5C-A82B-3EF14D232DB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B3092B8-0534-4A5C-A82B-3EF14D232DB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B3092B8-0534-4A5C-A82B-3EF14D232DB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
