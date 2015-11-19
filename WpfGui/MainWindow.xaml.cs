@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using WpfGui.TileStyles;
+using WpfGui.TileStyles.GameStyles;
 using WpfGui.ViewModel;
 
 namespace NumberWang.WpfGui
@@ -19,8 +20,7 @@ namespace NumberWang.WpfGui
         internal double GridTop;
         internal double GridLeft;
 
-        // Collections to style and keep track of dynamically created tiles
-        internal Dictionary<int, Color> TileColors;
+        // Collection to keep track of dynamically created tiles
         internal Dictionary<string, UIElement> registeredElements;
 
         internal BaseViewModel vm;
@@ -48,7 +48,6 @@ namespace NumberWang.WpfGui
             {
                 registeredElements = new Dictionary<string, UIElement>();
                 InitializeTiles(vm.game.Board.GetLength(0));
-                InitializeTileColors();
                 Play();
             });
 
@@ -80,24 +79,33 @@ namespace NumberWang.WpfGui
 
         public void DrawBoard(IGameEngine game)
         {
+            var styles = StylesFactory.GetStyles(game).GetStylesCollection();
+            
             game.Board.ForEachCell((i, j) =>
             {
                 if (game.Board[i, j] != 0)
                 {
                     var tile = (ContentControl)this.FindName(String.Format("tile{0}{1}", i, j));
-                    DisplayTile(tile, Colors.Black, TileColors[game.Board[i, j]], game.Board[i, j].ToString());
+                    DisplayTile(tile, styles, game.Board[i, j].ToString());
                 }
             });
-            DisplayTile(NextTile, Colors.Black, TileColors[game.NextNumber], game.NextNumber.ToString());
+            DisplayTile(NextTile, styles, game.NextNumber.ToString());
         }
 
-        private void DisplayTile(ContentControl tile, Color stroke, Color fill, string text)
+        private void DisplayTile(ContentControl tile, Dictionary<int, TileStyle> styles, string text)
         {
             var template = tile.Template;
             var tileShape = (Rectangle)template.FindName("TileShape", tile);
             var tileText = (TextBlock)template.FindName("TileText", tile);
-            tileShape.Stroke = new SolidColorBrush(stroke);
-            tileShape.Fill = new SolidColorBrush(fill);
+            var style = styles[Convert.ToInt32((text))];
+
+            tileShape.RadiusX = tileShape.RadiusY = style.Shape.Radius;
+            tileShape.Fill = style.Shape.Fill;
+            tileShape.Stroke = style.Shape.Border;
+            tileText.FontFamily = style.Font.Family;
+            tileText.FontSize = style.Font.Size;
+            tileText.FontWeight = style.Font.Weight;
+            tileText.Foreground = style.Font.Color;
             tileText.Text = text;
         }
 
@@ -145,11 +153,6 @@ namespace NumberWang.WpfGui
             registeredElements.Add(c.Name + "TileShape", (UIElement)c.Template.FindName("TileShape", c));
             RegisterName(c.Name + "TileText", c.Template.FindName("TileText", c));
             registeredElements.Add(c.Name + "TileText", (UIElement)c.Template.FindName("TileText", c));
-        }
-
-        private void InitializeTileColors()
-        {
-            TileColors = Styles.GetColors(vm.game);
         }
         #endregion
 

@@ -55,10 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="TileStyles\Colors\EightsColors.cs" />
-    <Compile Include="TileStyles\Colors\ThreesColors.cs" />
-    <Compile Include="TileStyles\Colors\TwentyFortyEightColors.cs" />
-    <Compile Include="TileStyles\Styles.cs" />
+    <Compile Include="TileStyles\GameStyles\BaseStyles.cs" />
+    <Compile Include="TileStyles\GameStyles\EightsStyles.cs" />
+    <Compile Include="TileStyles\GameStyles\IStyles.cs" />
+    <Compile Include="TileStyles\GameStyles\StylesFactory.cs" />
+    <Compile Include="TileStyles\GameStyles\ThreesStyles.cs" />
+    <Compile Include="TileStyles\GameStyles\TwentyFortyEightStyles.cs" />
+    <Compile Include="TileStyles\ShapeStyle.cs" />
+    <Compile Include="TileStyles\TileStyle.cs" />
+    <Compile Include="TileStyles\FontStyle.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\Commands\CommandHandler.cs" />
     <Page Include="MainWindow.xaml">
