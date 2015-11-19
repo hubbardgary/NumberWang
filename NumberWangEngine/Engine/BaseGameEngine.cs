@@ -24,6 +24,8 @@ namespace NumberWang
         private int[] SpawnNumbers { get; set; }
         public Random MyRandom { get; set; }
         public int NextNumber { get; set; }
+        public bool NextNumberVisible { get; set; } = true;
+        public bool ScoreVisible { get; set; } = true;
 
         public struct Coordinate
         {

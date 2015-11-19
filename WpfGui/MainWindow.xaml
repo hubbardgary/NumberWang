@@ -129,17 +129,18 @@
 
             <!-- Tiles get dynamically populated here -->
 
-            <Button Command="{Binding MoveCommand}" CommandParameter="Left" Content="←" Canvas.Left="312" Canvas.Top="196" Width="30" FontSize="18" FontWeight="Bold" />
-            <Button Command="{Binding MoveCommand}" CommandParameter="Right" Content="→" Canvas.Left="382" Canvas.Top="196" Width="30" FontSize="18" FontWeight="Bold"/>
-            <Button Command="{Binding MoveCommand}" CommandParameter="Up" Content="↑" Canvas.Left="347" Canvas.Top="163" Width="30" FontSize="18" FontWeight="Bold"/>
-            <Button Command="{Binding MoveCommand}" CommandParameter="Down" Content="↓" Canvas.Left="347" Canvas.Top="196" Width="30" FontSize="18" FontWeight="Bold"/>
+            <Button Command="{Binding MoveCommand}" CommandParameter="Left" Content="←" Canvas.Left="312" Canvas.Top="210" Width="30" FontSize="18" FontWeight="Bold" />
+            <Button Command="{Binding MoveCommand}" CommandParameter="Right" Content="→" Canvas.Left="382" Canvas.Top="210" Width="30" FontSize="18" FontWeight="Bold"/>
+            <Button Command="{Binding MoveCommand}" CommandParameter="Up" Content="↑" Canvas.Left="347" Canvas.Top="177" Width="30" FontSize="18" FontWeight="Bold"/>
+            <Button Command="{Binding MoveCommand}" CommandParameter="Down" Content="↓" Canvas.Left="347" Canvas.Top="210" Width="30" FontSize="18" FontWeight="Bold"/>
             <Grid
                 x:Name="NextTileContainer"
                 Canvas.Top="50"
                 Canvas.Left="300"
                 Width="120"
-                Height="95"
-                Background="LightGray">
+                Height="75"
+                Background="LightGray"
+                Visibility="{Binding Path=NextTileVisibility}">
                 <Border BorderThickness="1" BorderBrush="Black">
                     <Grid Margin="5">
                         <Label Content="Next Tile:" Width="99" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/>
@@ -151,6 +152,19 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top">
                         </ContentControl>
+                    </Grid>
+                </Border>
+            </Grid>
+            <Grid
+                x:Name="ScoreContainer"
+                Canvas.Top="128"
+                Canvas.Left="300"
+                Width="120"
+                Height="40"
+                Background="LightGray"
+                Visibility="{Binding Path=ScoreVisibility}">
+                <Border BorderThickness="1" BorderBrush="Black">
+                    <Grid Margin="5">
                         <Label Content="Score:" Canvas.Left="320" Canvas.Top="157" Width="45" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                         <Label x:Name="Score" Content="{Binding Path=Score}" Width="45" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="26"/>
                     </Grid>

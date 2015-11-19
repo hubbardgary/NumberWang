@@ -8,7 +8,10 @@ namespace NumberWang
         private const int InitialTileCount = 4;
         private static int[] SpawnNumbers = new int[] { 3, 5, 8, 8, 8 };
 
-        public Eights() : base(BoardSize, InitialTileCount, SpawnNumbers) { }
+        public Eights() : base(BoardSize, InitialTileCount, SpawnNumbers)
+        {
+            ScoreVisible = false;
+        }
 
         public override int Score()
         {

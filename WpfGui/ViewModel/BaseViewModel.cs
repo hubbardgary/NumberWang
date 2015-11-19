@@ -1,6 +1,7 @@
 ﻿using NumberWang;
 using System;
 using System.ComponentModel;
+using System.Windows;
 using System.Windows.Input;
 using WpfGui.ViewModel.Commands;
 
@@ -37,6 +38,28 @@ namespace WpfGui.ViewModel
             {
                 _score = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("Score"));
+            }
+        }
+
+        private Visibility _nextTileVisibility;
+        public Visibility NextTileVisibility
+        {
+            get { return _nextTileVisibility; }
+            set
+            {
+                _nextTileVisibility = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("NextTileVisibility"));
+            }
+        }
+
+        private Visibility _scoreVisibility;
+        public Visibility ScoreVisibility
+        {
+            get { return _scoreVisibility; }
+            set
+            {
+                _scoreVisibility = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ScoreVisibility"));
             }
         }
 
@@ -101,6 +124,7 @@ namespace WpfGui.ViewModel
             MoveCommand.RaiseCanExecuteChanged();
             if (game.GameOver())
             {
+                ScoreVisibility = Visibility.Visible;
                 PlayAgainVisible = true;
             }
         }
@@ -127,6 +151,8 @@ namespace WpfGui.ViewModel
             }
             if (game != null)
             {
+                NextTileVisibility = game.NextNumberVisible ? Visibility.Visible : Visibility.Hidden;
+                ScoreVisibility = game.ScoreVisible ? Visibility.Visible : Visibility.Hidden;
                 HideGameSelection = true;
                 if (InitializeBoard != null)
                 {

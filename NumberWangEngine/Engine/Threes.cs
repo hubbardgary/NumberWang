@@ -9,7 +9,10 @@ namespace NumberWang
         private const int InitialTileCount = 9;
         private static int[] SpawnNumbers = new int[] { 1, 2, 3, 3, 3 };
 
-        public Threes() : base(BoardSize, InitialTileCount, SpawnNumbers) { }
+        public Threes() : base(BoardSize, InitialTileCount, SpawnNumbers)
+        {
+            ScoreVisible = false;
+        }
         
         public override int Score()
         {
