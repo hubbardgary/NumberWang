@@ -9,19 +9,21 @@ namespace NumberWang
         private const int InitialTileCount = 3;
         private static int[] SpawnNumbers = new int[] { 2, 4 };
         private int[,] MergeMatrix = new int[BoardSize, BoardSize];
+        private int score = 0;
 
-        public TwentyFortyEight() : base(BoardSize, InitialTileCount, SpawnNumbers) { }
-
-        // TODO Score() is currently wrong. For 2048, each time a tile merges the score is increased by the value of the resulting tile.
-        // E.g. merging two 4s adds 8 to the score.
+        public TwentyFortyEight() : base(BoardSize, InitialTileCount, SpawnNumbers)
+        {
+            NextNumberVisible = false;
+        }
+        
         public override int Score()
         {
-            int points = 0;
-            Board.ForEachCell((i, j) =>
-            {
-                points += Board[i, j];
-            });
-            return points;
+            return score;
+        }
+
+        private void UpdateScore(int points)
+        {
+            score += points;
         }
 
         protected override int MergeTiles(int a, int b)
@@ -52,6 +54,12 @@ namespace NumberWang
                         moved = true;
                     }
                 }
+            });
+            // Calculate score by adding the value of all tiles merged in this move
+            MergeMatrix.ForEachCell((i, j) =>
+            {
+                if (MergeMatrix[i, j] == 1)
+                    UpdateScore(Board[i, j]);
             });
             return moved;
         }
