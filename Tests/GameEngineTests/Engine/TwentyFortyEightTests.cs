@@ -2,48 +2,50 @@
 
 namespace NumberWang.Tests
 {
-    [TestClass()]
-    public class EightsTests
+    [TestClass]
+    public class TwentyFortyEightTests
     {
-        Eights game = new Eights();
+        TwentyFortyEight game = new TwentyFortyEight();
 
         [TestMethod()]
         public void Score_Test()
         {
             // ARRANGE
-            game.Board = new int[4, 4]
+            int[,] preMove = new int[4, 4]
             {
-                {3,16,3,8},
-                {3,3,64,3},
-                {3,3,16,256},
-                {16,3,32,16}
+                {2,2,4,4},
+                {8,8,16,16},
+                {32,32,64,64},
+                {128,128,256,256}
             };
 
+            game.Board = preMove;
+
             // ACT
+            game.Move(Direction.Left);
+
             // ASSERT
-            Assert.AreEqual(704, game.Score());
+            Assert.AreEqual(1020, game.Score());
         }
-
-
-
+        
         [TestMethod()]
         public void Move_Left_When_Board_Is_Full_Test()
         {
             // ARRANGE
             int[,] preMove = new int[4, 4]
             {
-                {3,8,3,3},
-                {3,32,3,16},
-                {16,64,128,3},
-                {3,5,64,16}
+                {2,4,8,4},
+                {2,4,8,4},
+                {2,4,8,4},
+                {2,2,4,8}
             };
 
             int[,] expectedPostMove = new int[4, 4]
             {
-                {3,8,3,3},
-                {3,32,3,16},
-                {16,64,128,3},
-                {8,64,16,0}
+                {2,4,8,4},
+                {2,4,8,4},
+                {2,4,8,4},
+                {4,4,8,0}
             };
 
             game.Board = preMove;
@@ -56,6 +58,7 @@ namespace NumberWang.Tests
             {
                 for (int j = 0; j <= expectedPostMove.GetUpperBound(1); j++)
                 {
+                    // Don't check bottom right corner as random tile should have spawned there
                     if (i != 3 && j != 3)
                     {
                         Assert.AreEqual(expectedPostMove[i, j], game.Board[i, j]);
@@ -70,18 +73,18 @@ namespace NumberWang.Tests
             // ARRANGE
             int[,] preMove = new int[4, 4]
             {
-                {3,8,0,0},
-                {3,0,0,0},
-                {16,64,128,3},
-                {3,0,0,0}
+                {2,4,0,0},
+                {4,0,0,0},
+                {8,16,4,2},
+                {2,0,0,0}
             };
 
             int[,] expectedPostMove = new int[4, 4]
             {
-                {3,8,0,0},
-                {3,0,0,0},
-                {16,64,128,3},
-                {3,0,0,0}
+                {2,4,0,0},
+                {4,0,0,0},
+                {8,16,4,2},
+                {2,0,0,0}
             };
 
             game.Board = preMove;

@@ -7,9 +7,9 @@ namespace NumberWang
     {
         private const int BoardSize = 4;
         private const int InitialTileCount = 9;
-        private static int[] SpawnNumbers = new int[] { 1, 2, 3, 3, 3 };
+        private static int[] InitSpawnNumbers = new int[] { 1, 2, 3, 3, 3 };
 
-        public Threes() : base(BoardSize, InitialTileCount, SpawnNumbers)
+        public Threes() : base(BoardSize, InitialTileCount, InitSpawnNumbers)
         {
             ScoreVisible = false;
         }
@@ -41,7 +41,7 @@ namespace NumberWang
             // Tiles are merged if the current tile in the target cell is 0, or they sum to 3, or they're of the same value of 3 or greater
             if (!(a == 0 && b == 0) &&
                 (   (a == 0 && b != 0) ||
-                    (a + b == 3) ||
+                    (b != 0 && a + b == 3) ||
                     (a == b && a >= 3 && b >= 3)))
             {
                 return a + b;

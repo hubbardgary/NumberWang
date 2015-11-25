@@ -43,12 +43,18 @@ namespace WpfGui.TileStyles.GameStyles
 
         public override TileStyle GetStyle(Color tileColor, Color fontColor)
         {
-            var style = new TileStyle();
+            var style = GetDefaultStyle();
             style.Font.Color = new SolidColorBrush(fontColor);
+            style.Shape.Fill = new SolidColorBrush(tileColor);
+            return style;
+        }
+
+        private TileStyle GetDefaultStyle()
+        {
+            var style = new TileStyle();
             style.Font.Family = new FontFamily("Tempus Sans ITC");
             style.Font.Size = 20;
             style.Font.Weight = FontWeights.Bold;
-            style.Shape.Fill = new SolidColorBrush(tileColor);
             style.Shape.Border = new SolidColorBrush(Colors.Transparent);
             style.Shape.Radius = 2;
             return style;
@@ -56,7 +62,6 @@ namespace WpfGui.TileStyles.GameStyles
 
         public override Dictionary<int, TileStyle> GetStylesCollection()
         {
-
             return styles;
         }
     }

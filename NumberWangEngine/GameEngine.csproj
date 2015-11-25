@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Engine\BaseGameEngine.cs" />
     <Compile Include="Engine\Eights.cs" />
+    <Compile Include="Engine\Fives.cs" />
     <Compile Include="Engine\IGameEngine.cs" />
     <Compile Include="Engine\Threes.cs" />
     <Compile Include="Engine\TwentyFortyEight.cs" />

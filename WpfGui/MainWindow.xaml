@@ -170,8 +170,8 @@
                     </Grid>
                 </Border>
             </Grid>
-            <Label x:Name="GameOver" Style="{StaticResource GameOver}" Background="Salmon" Foreground="White" Content="Game Over" Canvas.Left="305" Canvas.Top="236" Width="120" Height="70" FontSize="18" FontFamily="Century" />
-            <Button x:Name="PlayAgain" Style="{StaticResource PlayAgain}" Command="{Binding PlayAgainCommand}" Content="Play again?" Canvas.Left="314" Canvas.Top="270" Width="100" FontSize="18" FontFamily="Century" />
+            <Label x:Name="GameOver" Style="{StaticResource GameOver}" Background="Salmon" Foreground="White" Content="Game Over" Canvas.Left="305" Canvas.Top="245" Width="120" Height="70" FontSize="18" FontFamily="Century" />
+            <Button x:Name="PlayAgain" Style="{StaticResource PlayAgain}" Command="{Binding PlayAgainCommand}" Content="Play again?" Canvas.Left="314" Canvas.Top="277" Width="100" FontSize="18" FontFamily="Century" />
             <Grid
                 Canvas.Left="100"
                 Canvas.Top="40"
@@ -200,6 +200,14 @@
                             Command="{Binding StartGameCommand}"
                             CommandParameter="Threes" 
                             Content="Threes"
+                            Margin="8"
+                            Width="80" 
+                            FontSize="15"
+                            FontFamily="Century" />
+                        <Button 
+                            Command="{Binding StartGameCommand}"
+                            CommandParameter="Fives" 
+                            Content="Fives"
                             Margin="8"
                             Width="80" 
                             FontSize="15"

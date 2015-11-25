@@ -9,6 +9,8 @@ namespace WpfGui.TileStyles.GameStyles
         {
             if (game is Threes)
                 return new ThreesStyles(game.GetMaxNumber());
+            else if (game is Fives)
+                return new FivesStyles();
             else if (game is Eights)
                 return new EightsStyles();
             else if (game is TwentyFortyEight)

@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TileStyles\GameStyles\FivesStyles.cs" />
     <Compile Include="TileStyles\GameStyles\BaseStyles.cs" />
     <Compile Include="TileStyles\GameStyles\EightsStyles.cs" />
     <Compile Include="TileStyles\GameStyles\IStyles.cs" />

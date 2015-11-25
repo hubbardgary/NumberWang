@@ -142,6 +142,9 @@ namespace WpfGui.ViewModel
                 case "Threes":
                     game = new Threes();
                     break;
+                case "Fives":
+                    game = new Fives();
+                    break;
                 case "Eights":
                     game = new Eights();
                     break;

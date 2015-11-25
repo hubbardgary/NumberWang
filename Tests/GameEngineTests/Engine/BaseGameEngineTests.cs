@@ -59,42 +59,6 @@ namespace NumberWang.Tests
         }
 
         [TestMethod()]
-        public void Move_Left_When_Board_Is_Full_Test()
-        {
-            // ARRANGE
-            int[,] preMove = new int[4, 4]
-            {
-                {3,8,3,3},
-                {3,32,3,16},
-                {16,64,128,3},
-                {3,5,64,16}
-            };
-
-            int[,] expectedPostMove = new int[4, 4]
-            {
-                {3,8,3,3},
-                {3,32,3,16},
-                {16,64,128,3},
-                {8,64,16,0}
-            };
-
-            game.Board = preMove;
-
-            // ACT
-            game.Move(Direction.Left);
-
-            //ASSERT
-            for (int i = 0; i <= expectedPostMove.GetUpperBound(0); i++)
-                for (int j = 0; j <= expectedPostMove.GetUpperBound(1); j++)
-                {
-                    if (i != 3 && j != 3)
-                    {
-                        Assert.AreEqual(expectedPostMove[i, j], game.Board[i, j]);
-                    }
-                }
-        }
-
-        [TestMethod()]
         public void Move_Up_Test()
         {
             // ARRANGE

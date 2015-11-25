@@ -21,7 +21,7 @@ namespace NumberWang
 
         public int[,] Board { get; set; }
         public int[,] MoveMatrix { get; set; }
-        private int[] SpawnNumbers { get; set; }
+        public int[] SpawnNumbers { get; set; }
         public Random MyRandom { get; set; }
         public int NextNumber { get; set; }
         public bool NextNumberVisible { get; set; } = true;
@@ -96,7 +96,7 @@ namespace NumberWang
                         Board[x, y] = newValue;
                         Board[x, y + 1] = 0;
                         moved = true;
-                        MoveMatrix[x, y + 1] = 1; // Moved
+                        MoveMatrix[x, y + 1] = 1; // Distance moved
                     }
                 }
             }
@@ -136,7 +136,7 @@ namespace NumberWang
         /// </summary>
         /// <param name="dir"></param>
         /// <returns></returns>
-        public bool Move(Direction dir)
+        public virtual bool Move(Direction dir)
         {
             MoveMatrix.ForEachCell((i, j) =>
             {

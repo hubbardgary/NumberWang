@@ -97,11 +97,12 @@ namespace NumberWang.WpfGui
             var template = tile.Template;
             var tileShape = (Rectangle)template.FindName("TileShape", tile);
             var tileText = (TextBlock)template.FindName("TileText", tile);
-            var style = styles[Convert.ToInt32((text))];
+            var style = styles.ContainsKey(Convert.ToInt32(text)) ? styles[Convert.ToInt32((text))] : styles[-1];
 
             tileShape.RadiusX = tileShape.RadiusY = style.Shape.Radius;
             tileShape.Fill = style.Shape.Fill;
             tileShape.Stroke = style.Shape.Border;
+            tileShape.StrokeThickness = style.Shape.BorderThickness;
             tileText.FontFamily = style.Font.Family;
             tileText.FontSize = style.Font.Size;
             tileText.FontWeight = style.Font.Weight;

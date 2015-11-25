@@ -7,11 +7,11 @@ namespace NumberWang
     {
         private const int BoardSize = 4;
         private const int InitialTileCount = 3;
-        private static int[] SpawnNumbers = new int[] { 2, 4 };
+        private static int[] InitSpawnNumbers = new int[] { 2, 4 };
         private int[,] MergeMatrix = new int[BoardSize, BoardSize];
         private int score = 0;
 
-        public TwentyFortyEight() : base(BoardSize, InitialTileCount, SpawnNumbers)
+        public TwentyFortyEight() : base(BoardSize, InitialTileCount, InitSpawnNumbers)
         {
             NextNumberVisible = false;
         }
