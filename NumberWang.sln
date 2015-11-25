@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGui", "WpfGui\WpfGui.csproj", "{1B3092B8-0534-4A5C-A82B-3EF14D232DB0}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleGui", "ConsoleGui\ConsoleGui.csproj", "{5964AC2D-4A37-43D2-BE17-8D8F5B415A67}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngine", "NumberWangEngine\GameEngine.csproj", "{8C7730A4-589C-46B6-A13E-1A60AF25424E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameEngineTests", "Tests\GameEngineTests\GameEngineTests.csproj", "{AD873C9D-8E41-4C04-A2CC-24FEA1655D07}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfGui", "WpfGui\WpfGui.csproj", "{1B3092B8-0534-4A5C-A82B-3EF14D232DB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
