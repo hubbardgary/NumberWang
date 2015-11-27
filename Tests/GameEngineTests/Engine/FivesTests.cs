@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace NumberWang.Tests
 {
@@ -58,8 +59,12 @@ namespace NumberWang.Tests
             {
                 for (int j = 0; j <= expectedPostMove.GetUpperBound(1); j++)
                 {
-                    // Don't check bottom right corner as random tile should have spawned there
-                    if (i != 3 && j != 3)
+                    if (i == game.Board.GetUpperBound(0) && j == game.Board.GetUpperBound(1))
+                    {
+                        // New tile should be spawned in bottom right corner
+                        Assert.IsTrue(game.SpawnNumbers.Contains(game.Board[i, j]));
+                    }
+                    else
                     {
                         Assert.AreEqual(expectedPostMove[i, j], game.Board[i, j]);
                     }
