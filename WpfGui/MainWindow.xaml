@@ -172,6 +172,7 @@
             </Grid>
             <Label x:Name="GameOver" Style="{StaticResource GameOver}" Background="Salmon" Foreground="White" Content="Game Over" Canvas.Left="305" Canvas.Top="245" Width="120" Height="70" FontSize="18" FontFamily="Century" />
             <Button x:Name="PlayAgain" Style="{StaticResource PlayAgain}" Command="{Binding PlayAgainCommand}" Content="Play again?" Canvas.Left="314" Canvas.Top="277" Width="100" FontSize="18" FontFamily="Century" />
+            <Button x:Name="QuitCurrentGame" Command="{Binding QuitCurrentGameCommand}" Content="Quit Game" Canvas.Left="314" Canvas.Top="277" Width="100" FontSize="18" FontFamily="Century" Visibility="{Binding Path=QuitCurrentGameVisibility}" />
             <Grid
                 Canvas.Left="100"
                 Canvas.Top="40"

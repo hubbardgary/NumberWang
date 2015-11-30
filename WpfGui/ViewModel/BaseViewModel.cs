@@ -63,6 +63,17 @@ namespace WpfGui.ViewModel
             }
         }
 
+        private Visibility _quitCurrentGameVisibility = Visibility.Hidden;
+        public Visibility QuitCurrentGameVisibility
+        {
+            get { return _quitCurrentGameVisibility; }
+            set
+            {
+                _quitCurrentGameVisibility = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("QuitCurrentGameVisibility"));
+            }
+        }
+
         private bool _playAgainVisible;
         public bool PlayAgainVisible
         {
@@ -100,14 +111,14 @@ namespace WpfGui.ViewModel
         {
             if (game != null)
             {
-                Direction d = (Direction)Enum.Parse(typeof(Direction), direction);
-                if (game.Move(d))
+                Direction directionToMove = (Direction)Enum.Parse(typeof(Direction), direction);
+                if (game.Move(directionToMove))
                 {
                     if (UpdateBoard != null)
                     {
                         MoveInProgress = true;
                         MoveCommand.RaiseCanExecuteChanged();
-                        UpdateBoard(d);
+                        UpdateBoard(directionToMove);
                         Score = game.Score();
                     }
                 }
@@ -126,6 +137,7 @@ namespace WpfGui.ViewModel
             {
                 ScoreVisibility = Visibility.Visible;
                 PlayAgainVisible = true;
+                QuitCurrentGameVisibility = Visibility.Hidden;
             }
         }
 
@@ -156,6 +168,7 @@ namespace WpfGui.ViewModel
             {
                 NextTileVisibility = game.NextNumberVisible ? Visibility.Visible : Visibility.Hidden;
                 ScoreVisibility = game.ScoreVisible ? Visibility.Visible : Visibility.Hidden;
+                QuitCurrentGameVisibility = Visibility.Visible;
                 HideGameSelection = true;
                 if (InitializeBoard != null)
                 {
@@ -168,10 +181,10 @@ namespace WpfGui.ViewModel
         private ICommand _playAgainCommand;
         public ICommand PlayAgainCommand
         {
-            get { return _playAgainCommand ?? (_playAgainCommand = new CommandHandler((param) => PlayAgainAction((string)param), () => true)); }
+            get { return _playAgainCommand ?? (_playAgainCommand = new CommandHandler((param) => PlayAgainAction(), () => true)); }
         }
 
-        public void PlayAgainAction(string gameMode)
+        public void PlayAgainAction()
         {
             if (TearDownBoard != null)
             {
@@ -181,9 +194,28 @@ namespace WpfGui.ViewModel
             Score = 0;
             HideGameSelection = false;
             PlayAgainVisible = false;
+            QuitCurrentGameVisibility = Visibility.Hidden;
+        }
+
+        private ICommand _quitCurrentGameCommand;
+        public ICommand QuitCurrentGameCommand
+        {
+            get { return _quitCurrentGameCommand ?? (_quitCurrentGameCommand = new CommandHandler((param) => QuitCurrentGameAction(), () => true)); }
+        }
+
+        public void QuitCurrentGameAction()
+        {
+            if (ConfirmQuit())
+            {
+                PlayAgainAction();
+            }
         }
         #endregion
 
+        private bool ConfirmQuit()
+        {
+            return MessageBox.Show("Are you sure you want to quit?", "Confirm quit", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
+        }
     }
 
 }

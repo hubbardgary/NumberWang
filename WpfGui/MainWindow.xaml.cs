@@ -64,6 +64,7 @@ namespace NumberWang.WpfGui
                     GridCanvas.Children.Remove(x.Value);
                 }
                 registeredElements.Clear();
+                HideTile(NextTile);
             });
         }
         #endregion
