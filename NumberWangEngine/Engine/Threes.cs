@@ -39,13 +39,18 @@ namespace NumberWang
         {
             // Tile b is sliding onto Tile a
             // Tiles are merged if the current tile in the target cell is 0, or they sum to 3, or they're of the same value of 3 or greater
-            if (!(a == 0 && b == 0) &&
-                (   (a == 0 && b != 0) ||
-                    (b != 0 && a + b == 3) ||
-                    (a == b && a >= 3 && b >= 3)))
+            
+            if (a == 0 && b != 0)
             {
+                // a is unoccupied, so b slides into its space
+                return b;
+            }
+            if ((a >= 3 && a == b) || (b != 0 && a + b == 3))
+            {
+                // b merges with a to form a new value
                 return a + b;
             }
+            // No move takes place
             return -1;
         }
     }
