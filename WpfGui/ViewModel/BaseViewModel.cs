@@ -74,6 +74,20 @@ namespace WpfGui.ViewModel
             }
         }
 
+        private bool _hideConfirmQuit = true;
+        public bool HideConfirmQuit
+        {
+            get { return _hideConfirmQuit; }
+            set
+            {
+                _hideConfirmQuit = value;
+                if (PropertyChanged != null)
+                {
+                    PropertyChanged(this, new PropertyChangedEventArgs("HideConfirmQuit"));
+                }
+            }
+        }
+
         private bool _playAgainVisible;
         public bool PlayAgainVisible
         {
@@ -205,17 +219,24 @@ namespace WpfGui.ViewModel
 
         public void QuitCurrentGameAction()
         {
-            if (ConfirmQuit())
+            HideConfirmQuit = false;
+        }
+
+        private ICommand _quitGameCommand;
+        public ICommand QuitGameCommand
+        {
+            get { return _quitGameCommand ?? (_quitGameCommand = new CommandHandler((param) => QuitGameAction(Convert.ToBoolean(param)), () => true)); }
+        }
+
+        public void QuitGameAction(bool quit)
+        {
+            HideConfirmQuit = true;
+            if (quit)
             {
                 PlayAgainAction();
             }
         }
         #endregion
-
-        private bool ConfirmQuit()
-        {
-            return MessageBox.Show("Are you sure you want to quit?", "Confirm quit", MessageBoxButton.YesNo) == MessageBoxResult.Yes;
-        }
     }
 
 }

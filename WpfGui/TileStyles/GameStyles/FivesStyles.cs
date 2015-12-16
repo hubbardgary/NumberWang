@@ -49,10 +49,10 @@ namespace WpfGui.TileStyles.GameStyles
         {
             var style = new TileStyle();
             style.Font.Family = new FontFamily("Yu Gothic UI Semilight");
-            style.Font.Size = 20;
+            style.Font.Size = 40;
             style.Font.Weight = FontWeights.Bold;
-            style.Shape.BorderThickness = 3;
-            style.Shape.Radius = 25;
+            style.Shape.BorderThickness = 6;
+            style.Shape.Radius = 50;
             return style;
         }
     }

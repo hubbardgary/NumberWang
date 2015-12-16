@@ -16,7 +16,7 @@ namespace NumberWang.WpfGui
     public partial class MainWindow : Window, IGameGui
     {
         // Values used to size dynamically created tiles
-        internal const int TileSize = 50;
+        internal const int TileSize = 100;
         internal double GridTop;
         internal double GridLeft;
 

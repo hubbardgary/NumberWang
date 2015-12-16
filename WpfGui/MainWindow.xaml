@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WpfGui.ViewModel"
         xmlns:numberwang="clr-namespace:NumberWang;assembly=NumberWangGameEngine"
-        Title="NumberWang" Height="350" Width="480">
+        Title="NumberWang" Height="640" Width="960">
     <Window.Resources>
         <ControlTemplate
             x:Key="TileControl">
             <Grid
-                Height="50"
-                Width="50">
+                Height="100"
+                Width="100">
                 <Rectangle
                     RadiusX="7"
                     RadiusY="7"
@@ -40,7 +40,8 @@
                                     Storyboard.TargetProperty="ZIndex"
                                     From="1"
                                     To="-1"
-                                    Duration="0:0:0.2" />
+                                    Duration="0:0:0.0"
+                                    BeginTime="0:0:0.2"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.EnterActions>
@@ -56,7 +57,56 @@
                                     Storyboard.TargetProperty="ZIndex"
                                     From="-1"
                                     To="1"
+                                    Duration="0:0:0.0" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1.5">
+                        <GradientStop Color="MistyRose" Offset="0"/>
+                        <GradientStop Color="Yellow" Offset="1.5"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="HideConfirmQuit" TargetType="Grid">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=DataContext.HideConfirmQuit}"
+                             Value="False">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="Opacity"
+                                    From="0"
+                                    To="1"
                                     Duration="0:0:0.2" />
+                                <Int32Animation
+                                    Storyboard.TargetProperty="ZIndex"
+                                    From="-1"
+                                    To="1"
+                                    Duration="0:0:0.0" />
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
+                                    Storyboard.TargetProperty="Opacity"
+                                    From="1"
+                                    To="0"
+                                    Duration="0:0:0.2" />
+                                <Int32Animation
+                                    Storyboard.TargetProperty="ZIndex"
+                                    From="1"
+                                    To="-1"
+                                    Duration="0:0:0.0"
+                                    BeginTime="0:0:0.2"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </DataTrigger.ExitActions>
@@ -109,127 +159,272 @@
     </Window.Resources>
 
     <Window.InputBindings>
-        <KeyBinding Command="{Binding MoveCommand}" CommandParameter="Left" Key="Left" />
-        <KeyBinding Command="{Binding MoveCommand}" CommandParameter="Right" Key="Right" />
-        <KeyBinding Command="{Binding MoveCommand}" CommandParameter="Up" Key="Up" />
-        <KeyBinding Command="{Binding MoveCommand}" CommandParameter="Down" Key="Down" />
+        <KeyBinding 
+            Command="{Binding MoveCommand}" 
+            CommandParameter="Left" Key="Left" />
+        <KeyBinding 
+            Command="{Binding MoveCommand}" 
+            CommandParameter="Right" Key="Right" />
+        <KeyBinding 
+            Command="{Binding MoveCommand}" 
+            CommandParameter="Up" Key="Up" />
+        <KeyBinding 
+            Command="{Binding MoveCommand}" 
+            CommandParameter="Down" Key="Down" />
     </Window.InputBindings>
 
     <Grid>
         <Canvas Name="GridCanvas" Style="{StaticResource MainCanvas}">
             <Rectangle
                 x:Name="BoardContainer"
-                Canvas.Left="45"
-                Canvas.Top="45"
-                Height="220"
-                Width="220"
+                Canvas.Left="90"
+                Canvas.Top="40"
+                Height="440"
+                Width="440"
                 Stroke="Tomato"
-                StrokeThickness="5"
+                StrokeThickness="10"
                 Fill="LightGray" />
 
             <!-- Tiles get dynamically populated here -->
 
-            <Button Command="{Binding MoveCommand}" CommandParameter="Left" Content="←" Canvas.Left="312" Canvas.Top="210" Width="30" FontSize="18" FontWeight="Bold" />
-            <Button Command="{Binding MoveCommand}" CommandParameter="Right" Content="→" Canvas.Left="382" Canvas.Top="210" Width="30" FontSize="18" FontWeight="Bold"/>
-            <Button Command="{Binding MoveCommand}" CommandParameter="Up" Content="↑" Canvas.Left="347" Canvas.Top="177" Width="30" FontSize="18" FontWeight="Bold"/>
-            <Button Command="{Binding MoveCommand}" CommandParameter="Down" Content="↓" Canvas.Left="347" Canvas.Top="210" Width="30" FontSize="18" FontWeight="Bold"/>
+            <Button 
+                Command="{Binding MoveCommand}" 
+                CommandParameter="Left" 
+                Content="←" 
+                Canvas.Left="624" 
+                Canvas.Top="370" 
+                Width="60" 
+                FontSize="36" 
+                FontWeight="Bold" />
+            <Button 
+                Command="{Binding MoveCommand}" 
+                CommandParameter="Right" 
+                Content="→" 
+                Canvas.Left="764" 
+                Canvas.Top="370" 
+                Width="60" 
+                FontSize="36" 
+                FontWeight="Bold"/>
+            <Button 
+                Command="{Binding MoveCommand}" 
+                CommandParameter="Up" 
+                Content="↑" 
+                Canvas.Left="694" 
+                Canvas.Top="304" 
+                Width="60" 
+                FontSize="36" 
+                FontWeight="Bold"/>
+            <Button 
+                Command="{Binding MoveCommand}" 
+                CommandParameter="Down" 
+                Content="↓" 
+                Canvas.Left="694" 
+                Canvas.Top="370" 
+                Width="60" 
+                FontSize="36" 
+                FontWeight="Bold"/>
             <Grid
                 x:Name="NextTileContainer"
-                Canvas.Top="50"
-                Canvas.Left="300"
-                Width="120"
-                Height="75"
+                Canvas.Top="20"
+                Canvas.Left="600"
+                Width="240"
+                Height="180"
                 Background="LightGray"
                 Visibility="{Binding Path=NextTileVisibility}">
-                <Border BorderThickness="1" BorderBrush="Black">
-                    <Grid Margin="5">
-                        <Label Content="Next Tile:" Width="99" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                <Border BorderThickness="4" BorderBrush="Black">
+                    <Grid Margin="10">
+                        <Label 
+                            Content="Next Tile:" 
+                            Width="199" 
+                            Height="50" 
+                            FontFamily="Gill Sans MT" 
+                            FontSize="30" 
+                            HorizontalContentAlignment="Center" 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Top"/>
                         <ContentControl 
                             Template="{StaticResource ResourceKey=TileControl}"
                             Name="NextTile"
-                            Canvas.Left="382"
-                            Canvas.Top="91"
-                            HorizontalAlignment="Right"
-                            VerticalAlignment="Top">
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Bottom">
                         </ContentControl>
                     </Grid>
                 </Border>
             </Grid>
             <Grid
                 x:Name="ScoreContainer"
-                Canvas.Top="128"
-                Canvas.Left="300"
-                Width="120"
-                Height="40"
+                Canvas.Top="206"
+                Canvas.Left="600"
+                Width="240"
+                Height="80"
                 Background="LightGray"
                 Visibility="{Binding Path=ScoreVisibility}">
-                <Border BorderThickness="1" BorderBrush="Black">
-                    <Grid Margin="5">
-                        <Label Content="Score:" Canvas.Left="320" Canvas.Top="157" Width="45" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                        <Label x:Name="Score" Content="{Binding Path=Score}" Width="45" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="26"/>
+                <Border 
+                    BorderThickness="4" 
+                    BorderBrush="Black">
+                    <Grid 
+                        Margin="10">
+                        <Label 
+                            Content="Score:" 
+                            Width="90" 
+                            FontFamily="Gill Sans MT" 
+                            FontSize="30" 
+                            HorizontalAlignment="Left" 
+                            VerticalAlignment="Center"/>
+                        <Label 
+                            x:Name="Score" 
+                            Content="{Binding Path=Score}" 
+                            Width="90" 
+                            FontFamily="Gill Sans MT" 
+                            FontSize="30" 
+                            HorizontalAlignment="Right" 
+                            VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
             </Grid>
-            <Label x:Name="GameOver" Style="{StaticResource GameOver}" Background="Salmon" Foreground="White" Content="Game Over" Canvas.Left="305" Canvas.Top="245" Width="120" Height="70" FontSize="18" FontFamily="Century" />
-            <Button x:Name="PlayAgain" Style="{StaticResource PlayAgain}" Command="{Binding PlayAgainCommand}" Content="Play again?" Canvas.Left="314" Canvas.Top="277" Width="100" FontSize="18" FontFamily="Century" />
-            <Button x:Name="QuitCurrentGame" Command="{Binding QuitCurrentGameCommand}" Content="Quit Game" Canvas.Left="314" Canvas.Top="277" Width="100" FontSize="18" FontFamily="Century" Visibility="{Binding Path=QuitCurrentGameVisibility}" />
+            <Label 
+                x:Name="GameOver" 
+                Style="{StaticResource GameOver}" 
+                Background="Salmon" 
+                Foreground="White" 
+                BorderThickness="4" 
+                BorderBrush="Black" 
+                Content="Game Over" 
+                Canvas.Left="610" 
+                Canvas.Top="440" 
+                Width="240" 
+                Height="140" 
+                FontSize="36" 
+                FontFamily="Gill Sans MT"
+                HorizontalContentAlignment="Center" />
+            <Button 
+                x:Name="PlayAgain" 
+                Style="{StaticResource PlayAgain}" 
+                Command="{Binding PlayAgainCommand}" 
+                Content="Play again?" 
+                Canvas.Left="628" 
+                Canvas.Top="504" 
+                Width="200" 
+                FontSize="36" 
+                FontFamily="Gill Sans MT" />
+            <Button 
+                x:Name="QuitCurrentGame" 
+                Command="{Binding QuitCurrentGameCommand}" 
+                Content="Quit Game" 
+                Canvas.Left="628" 
+                Canvas.Top="504" 
+                Width="200" 
+                FontSize="36" 
+                FontFamily="Gill Sans MT" 
+                Visibility="{Binding Path=QuitCurrentGameVisibility}" />
             <Grid
-                Canvas.Left="100"
-                Canvas.Top="40"
+                Canvas.Left="200"
+                Canvas.Top="30"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Style="{StaticResource HideGameSelection}">
-                <Border BorderThickness="2" BorderBrush="Black">
+                <Border 
+                    BorderThickness="4" 
+                    BorderBrush="Black">
                     <StackPanel
                         x:Name="ChooseGameCanvas"
-                        Height="240"
-                        Width="282"
+                        Height="480"
+                        Width="564"
                         Panel.ZIndex="1"
                         Opacity="1">
                         <Label 
-                            Content="Game mode:"
-                            Canvas.Left="375"
-                            Canvas.Top="157"
-                            Width="110"
+                            Content="Game mode"
+                            Width="260"
                             HorizontalAlignment="Center"
                             HorizontalContentAlignment="Center"
-                            Margin="8"
-                            FontSize="15"
+                            Margin="16"
+                            FontSize="40"
                             FontWeight="Bold"
-                            FontFamily="Century"/>
+                            FontFamily="Gill Sans MT"/>
                         <Button 
                             Command="{Binding StartGameCommand}"
                             CommandParameter="Threes" 
                             Content="Threes"
-                            Margin="8"
-                            Width="80" 
-                            FontSize="15"
-                            FontFamily="Century" />
+                            Margin="16"
+                            Width="160" 
+                            FontSize="40"
+                            FontFamily="Gill Sans MT" />
                         <Button 
                             Command="{Binding StartGameCommand}"
                             CommandParameter="Fives" 
                             Content="Fives"
-                            Margin="8"
-                            Width="80" 
-                            FontSize="15"
-                            FontFamily="Century" />
+                            Margin="16"
+                            Width="160" 
+                            FontSize="40"
+                            FontFamily="Gill Sans MT" />
                         <Button
                             Command="{Binding StartGameCommand}"
                             CommandParameter="Eights" 
                             Content="Eights"
-                            Margin="8"
-                            Width="80" 
-                            FontSize="15"
-                            FontFamily="Century" />
+                            Margin="16"
+                            Width="160" 
+                            FontSize="40"
+                            FontFamily="Gill Sans MT" />
                         <Button
                             Command="{Binding StartGameCommand}"
                             CommandParameter="2048" 
                             Content="2048"
-                            Margin="8"
-                            Width="80" 
-                            FontSize="15"
-                            FontFamily="Century" />
+                            Margin="16"
+                            Width="160" 
+                            FontSize="40"
+                            FontFamily="Gill Sans MT" />
                     </StackPanel>
+                </Border>
+            </Grid>
+            <Grid
+                Canvas.Left="200"
+                Canvas.Top="150"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Panel.ZIndex="-1"
+                Opacity="0"
+                Style="{StaticResource HideConfirmQuit}">
+                <Border 
+                    BorderThickness="4" 
+                    BorderBrush="Black">
+                    <Grid
+                        x:Name="ConfirmQuit"
+                        Height="200"
+                        Width="564"
+                        Opacity="1"
+                        HorizontalAlignment="Center">
+                        <Label 
+                            Content="Do you want to leave this game?"
+                            Width="500"
+                            Height="50"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center"
+                            VerticalAlignment="Top"
+                            Margin="30"
+                            FontSize="30"
+                            FontWeight="Bold"
+                            FontFamily="Gill Sans MT"/>
+                        <Button
+                            Command="{Binding QuitGameCommand}"
+                            CommandParameter="true"
+                            Content="Yes"
+                            Margin="98,107,0,43"
+                            Width="160" 
+                            Height="50"
+                            FontSize="40"
+                            HorizontalAlignment="Left"
+                            FontFamily="Gill Sans MT" />
+                        <Button
+                            Command="{Binding QuitGameCommand}"
+                            CommandParameter="false"
+                            Content="No"
+                            Margin="0,107,98,43"
+                            Width="160"
+                            Height="50"
+                            FontSize="40"
+                            HorizontalAlignment="Right"
+                            FontFamily="Gill Sans MT" />
+                    </Grid>
                 </Border>
             </Grid>
         </Canvas>

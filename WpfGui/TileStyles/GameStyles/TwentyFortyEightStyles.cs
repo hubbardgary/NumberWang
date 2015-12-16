@@ -37,10 +37,10 @@ namespace WpfGui.TileStyles.GameStyles
         {
             var style = new TileStyle();
             style.Font.Family = new FontFamily("Franklin Gothic Heavy");
-            style.Font.Size = 20;
+            style.Font.Size = 40;
             style.Font.Weight = FontWeights.Bold;
             style.Shape.Border = new SolidColorBrush(Colors.Transparent);
-            style.Shape.Radius = 1;
+            style.Shape.Radius = 2;
             return style;
         }
     }
